@@ -1,0 +1,30 @@
+IOTDB için öncelikle docker image çekelim
+docker pull apache/iotdb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kaynak
+https://hub.docker.com/r/apache/iotdb
