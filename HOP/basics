@@ -1,0 +1,17 @@
+Öncelikle HOP docker imageını çekelim
+
+docker pull apache/hop
+docker pull apache/hop:latest
+
+
+
+
+
+
+
+
+
+
+
+Kaynak 
+https://hub.docker.com/r/apache/hop
