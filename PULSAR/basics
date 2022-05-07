@@ -1,0 +1,9 @@
+Öncelikle docker imageını çekelim
+
+docker pull apachepulsar/pulsar
+docker pull apachepulsar/pulsar:latest
+
+
+
+Kaynak
+https://hub.docker.com/r/apachepulsar/pulsar/tags
