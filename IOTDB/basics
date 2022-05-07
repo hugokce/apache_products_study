@@ -28,3 +28,9 @@ docker pull apache/iotdb
 
 Kaynak
 https://hub.docker.com/r/apache/iotdb
+https://github.com/apache/iotdb
+https://iotdb.apache.org/
+https://iotdb.apache.org/UserGuide/Master/QuickStart/QuickStart.html
+https://iotdb.apache.org/UserGuide/Master/Query-Data/Overview.html#basic-examples
+https://iotdb.apache.org/UserGuide/Master/Process-Data/UDF-User-Defined-Function.html#udf-types
+
