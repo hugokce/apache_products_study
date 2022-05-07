@@ -1,0 +1,9 @@
+Öncelikle docker imageını çekelim
+
+docker pull apache/airflow
+docker pull apache/airflow:latest
+
+
+Kaynak
+https://github.com/apache/airflow
+https://hub.docker.com/r/apache/airflow
