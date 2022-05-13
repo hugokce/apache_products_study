@@ -1,1 +1,25 @@
+Kafka In Action adlı kitaptan edindiğim notlar ile dockerda cluster oluşturalım. 
+https://github.com/Kafka-In-Action-Book
+
+Alttaki kodlar git bash ile clonelanır
+git clone https://github.com/Kafka-In-Action-Book/Kafka-In-Action-Source-Code.git
+
+Sonra powershellden devam edelim
+cd .\Kafka-In-Action-Source-Code\
+
+docker-compose up -d
+
+yüklemeye başlar max 5dk sürer.
+docker ps --format "{{.Names}}: {{.State}}"
+ile 7 servisin durumunu kontrol ederiz.
+
+
+
+
+
+
+
+
+
+
 
