@@ -14,7 +14,8 @@ hdfs dfs -copyFromLocal u.item sampledata/u.item
 hdfs dfs -ls sampledata  dediğimizde alttaki iki dosyayı da görebiliriz
 
 sonrasında pig deyip programı başlatırız grunt karşımıza geldiyse devam ediyoruz.
-
+run hdfs://901b7bfed63f:9000/user/root/sampledata/pig_modified.pig  ile çalıştırdık
+ 
 
 
 
