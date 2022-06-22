@@ -3,6 +3,16 @@ Ornek üzerinden gidelim
 docker pull suhothayan/hadoop-spark-pig-hive  makineyi çekeriz
 docker run -it -p 50070:50070 -p 8088:8088 -p 8080:8080 suhothayan/hadoop-spark-pig-hive:2.9.2 bash
 
+hdfs dfs -mkdir sampledata
+
+dosyaları lokale alalım sonrasında hdfse kopyalayalım
+wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
+wget http://media.sundog-soft.com/hadoop/ml-100k/u.item
+hdfs dfs -copyFromLocal u.data sampledata/u.data  
+hdfs dfs -copyFromLocal u.item sampledata/u.item  
+sonrasında pig deyip programı başlatırız grunt karşımıza geldiyse devam ediyoruz.
+
+
 
 
 
