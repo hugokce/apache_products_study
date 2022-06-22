@@ -1,5 +1,5 @@
-ratings = LOAD '/sampledata/u.data' AS (userID:int, movieID:int, rating:int, ratingTime:int);
-metadata = LOAD '/sampledata/u.item' USING PigStorage('|')
+ratings = LOAD 'hdfs://901b7bfed63f:9000/user/root/sampledata/u.data' AS (userID:int, movieID:int, rating:int, ratingTime:int);
+metadata = LOAD 'hdfs://901b7bfed63f:9000/user/root/sampledata/u.item' USING PigStorage('|')
 	AS (movieID:int, movieTitle:chararray, releaseDate:chararray, videoRealese:chararray, imdblink:chararray);
    
 nameLookup = FOREACH metadata GENERATE movieID, movieTitle,
