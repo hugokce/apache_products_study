@@ -1,8 +1,16 @@
 Ornek üzerinden gidelim
 
+docker pull suhothayan/hadoop-spark-pig-hive  makineyi çekeriz
+docker run -it -p 50070:50070 -p 8088:8088 -p 8080:8080 suhothayan/hadoop-spark-pig-hive:2.9.2 bash
+
+
+
+
+
 
 
 Kaynaklar
-
+https://github.com/suhothayan/hadoop-spark-pig-hive
 https://www.tutorialspoint.com/apache_pig/index.htm
 https://www.guru99.com/introduction-to-pig-and-hive.html
+https://www.udemy.com/course/the-ultimate-hands-on-hadoop-tame-your-big-data/learn/lecture/5963066#overview
