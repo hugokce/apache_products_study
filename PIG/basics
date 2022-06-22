@@ -10,6 +10,9 @@ wget http://media.sundog-soft.com/hadoop/ml-100k/u.data
 wget http://media.sundog-soft.com/hadoop/ml-100k/u.item
 hdfs dfs -copyFromLocal u.data sampledata/u.data  
 hdfs dfs -copyFromLocal u.item sampledata/u.item  
+
+hdfs dfs -ls sampledata  dediğimizde alttaki iki dosyayı da görebiliriz
+
 sonrasında pig deyip programı başlatırız grunt karşımıza geldiyse devam ediyoruz.
 
 
