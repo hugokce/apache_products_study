@@ -1,0 +1,6 @@
+https://hub.docker.com/r/bitnami/cassandra/
+docker pull bitnami/cassandra
+
+Kaynaklar
+https://2much2learn.com/setting-up-cassandra-with-docker/
+https://hub.docker.com/r/bitnami/cassandra/
