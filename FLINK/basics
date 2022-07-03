@@ -2,3 +2,7 @@ Official Docker Image
 https://hub.docker.com/_/flink
 
 docker pull flink
+
+
+Kaynaklar
+https://jbcodeforce.github.io/flink-studies/firstapp/
