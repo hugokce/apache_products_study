@@ -9,7 +9,8 @@ docker run -it -p 6650:6650  -p 8080:8080 --mount source=pulsardata,target=/puls
 
 docker exec -it pulsar /bin/bash  (5)
 
-bin/pulsar-admin clusters list çıktı olarak standalone yazar
+bin/pulsar-admin clusters list 
+çıktı olarak standalone yazar
 
 bin/pulsar-admin clusters get standalone dersek 
 
@@ -60,6 +61,23 @@ bin/pulsar-admin topics list investments/stocks dersek
 topic olmadığını görürüz
 
 İlk topicimizi oluşturalım
+bin/pulsar-admin topics create persistent://investments/stocks/stocks-ticker
+
+bin/pulsar-admin topics list investments/stocks
+
+"persistent://investments/stocks/stocks-ticker"  olarak döner
+
+İlk consumerı oluşturalım yeni bir terminal açalım
+bin/pulsar-client consume -s "test-subs" -n 0 persistent://investments/stocks/stocks-ticker
+
+bin/pulsar-client produce persistent://investments/stocks/stocks-ticker -k AAPL -m "{"date":632700000000,"name":"AAPL","open":1.22,"close":1.22,"high":1.23,"low":1.2,"volume":2367300.0}" -s "\n"
+producer mesaj üretildi
+2022-07-22T15:47:09,017+0000 [main] INFO  org.apache.pulsar.client.cli.PulsarClientTool - 1 messages successfully produced
+
+consumerda mesaj geldi bilgilerini aldık
+----- got message -----
+key:[AAPL], properties:[], content:{date:632700000000,name:AAPL,open:1.22,close:1.22,high:1.23,low:1.2,volume:2367300.0}
+2022-07-22T15:47:07,917+0000 [pulsar-timer-5-1] INFO  org.apache.pulsar.client.impl.ConsumerStatsRecorderImpl - [persistent://investments/stocks/stocks-ticker] [test-subs] [d89de] Prefetched messages: 0 --- Consume throughput received: 0.02 msgs/s --- 0.00 Mbit/s --- Ack sent rate: 0.02 ack/s --- Failed messages: 0 --- batch messages: 0 ---Failed acks: 0
 
 
 
@@ -77,3 +95,11 @@ Kaynak
 3-https://www.youtube.com/watch?v=H88re4p-DoU&t=1547s
 4-https://www.youtube.com/watch?v=h3wylHdvs-g
 5-https://www.youtube.com/watch?v=w2dzxQfAiZM
+6-https://pulsar.apache.org/docs/sql-getting-started
+7-https://pulsar.apache.org/docs/client-libraries-python/
+8-https://pulsar.apache.org/docs/admin-api-topics/
+
+
+
+
+
