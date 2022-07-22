@@ -32,9 +32,34 @@ verir
  bin/pulsar-admin namespaces list public   çıktı olarak
 "public/default"
 "public/functions"
+2 adet namespace varmış public tenants altında.
+Topic oluştururken tenant vermezsek public altında oluşur
 
+investments adında tenants oluşturalım sonra listeleyip görelim
+bin/pulsar-admin tenants create --admin-roles admin --allowed-clusters standalone investments
+bin/pulsar-admin tenants list
+"investments"
+"public"
+"pulsar"
+"sample"
 
+bin/pulsar-admin tenants get investments  alttaki çıktıyı verir adminRoleü ve clustersı zaten tanımlamıştık
+{
+  "adminRoles" : [ "admin" ],
+  "allowedClusters" : [ "standalone" ]
+}
 
+Namespace oluşturalım
+bin/pulsar-admin namespaces create investments/stocks
+
+şimdi oluştu mu bakalım.
+bin/pulsar-admin namespaces list investments
+"investments/stocks"  verir
+
+bin/pulsar-admin topics list investments/stocks dersek
+topic olmadığını görürüz
+
+İlk topicimizi oluşturalım
 
 
 
