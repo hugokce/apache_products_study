@@ -10,6 +10,7 @@ docker run -it -p 6650:6650  -p 8080:8080 --mount source=pulsardata,target=/puls
 docker exec -it pulsar /bin/bash  (5)
 
 Tim Spann Code çalışmaları
+3 nolu kaynaktaki videodan detaya gidilebilir.
 Tenant --> Namespace --> Topic sırasına göre hareket edelim
 
 bin/pulsar-admin tenants create conference
@@ -27,8 +28,17 @@ bin/pulsar-admin topics create persistent://conference/pythonweb/first
                                             tenant    namespace  topic
 bin/pulsar-admin topics list conference/pythonweb
 
+pip3 install pulsar-client=='2.9.1[all]'
+Python3 Pulsar producer oluşturmak için
+import pulsar
+client=pulsar.Client('pulsar://localhost:6650')
+producer=client.create_producer('persistent://conference/pythonweb/first')
+producer.send(('Simple Text Message').encode('utf-8'))
+client.close
 
-
+StreamNativeCloud üzerindeki instancetan devam eden bir çalışma
+öncemli olan kütüphanelerden biri import edilir
+from pulsar.schema import * 
 
 
 bin/pulsar-admin clusters list 
@@ -369,6 +379,7 @@ Kaynak
 7-https://pulsar.apache.org/docs/client-libraries-python/
 8-https://pulsar.apache.org/docs/admin-api-topics/
 9-https://pulsar.apache.org/docs/next/admin-api-topics#get-internal-stats
-
+10-https://github.com/tspannhw/PulsarOnRaspberryPi
+11-https://github.com/apache/pulsar
 
 
