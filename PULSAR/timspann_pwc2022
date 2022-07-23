@@ -9,6 +9,28 @@ docker run -it -p 6650:6650  -p 8080:8080 --mount source=pulsardata,target=/puls
 
 docker exec -it pulsar /bin/bash  (5)
 
+Tim Spann Code çalışmaları
+Tenant --> Namespace --> Topic sırasına göre hareket edelim
+
+bin/pulsar-admin tenants create conference
+conference isimli tenant oluşturduk
+
+bin/pulsar-admin namespaces create conference/pythonweb
+conference altında pythonweb adlı namespace oluşturduk
+
+bin/pulsar-admin tenants list
+bin/pulsar-admin namespaces list conference
+
+Şimdi de önce tenant ardından namespace altında ilk topicimizi oluşturalım
+persistent ve not-persistent olarak oluşturabiliz
+bin/pulsar-admin topics create persistent://conference/pythonweb/first
+                                            tenant    namespace  topic
+bin/pulsar-admin topics list conference/pythonweb
+
+
+
+
+
 bin/pulsar-admin clusters list 
 çıktı olarak standalone yazar
 
