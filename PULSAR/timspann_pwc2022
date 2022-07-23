@@ -50,8 +50,34 @@ while True:
   consumer.acknowledge(msg)
 client.close()
 
+Kafka from Python örneği
+pip3 install kafka-python
+from kafka import KafkaProducer
+from kafka.errors import KafkaError
 
+row={}
+row['gasKO']=str(readings)
+json_string=json.dumps(row)
+json_string=json_string.strip()
 
+producer=KafkaProducer(bootstrap_servers='pulsar1:9092',retries=3)
+producer.send('topic-kafka-1',json.dumps(row).encode('utf-8'))
+producer.flush()
+
+datayı okumak için
+select * from pulsar."public/default"."garden";
+şemayı görmek için 
+desc pulsar."public/default"."garden"; kullanılır
+
+select __key__,__publis_time__,uuid,memory from pulsar."publis/default"."garden"
+__partition__
+__event_time__
+__publish_time__
+__message_id__
+__sequence_id__
+__producer_name__
+__key__
+__properties__
 
 
 
@@ -68,4 +94,9 @@ Kaynak
 10-https://github.com/tspannhw/PulsarOnRaspberryPi
 11-https://github.com/apache/pulsar
 12-https://github.com/tspannhw/pulsar-pychat-function
+13-https://docs.streamnative.io/platform/v1.1.0/concepts/kop-concepts#consume-messages
+14-https://github.com/tspannhw/FLiP-Pi-Weather  FLİP ile başlayan repolarda birçok örnek var ulaşılabilir
+15-https://github.com/tspannhw/PythonPulsarExamples
+
+
 
