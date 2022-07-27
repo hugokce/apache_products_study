@@ -1,2 +1,76 @@
 https://www.udemy.com/course/learn-apache-pulsar/learn/lecture/24891332#overview
 1,5 saat
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hocanın kendi sitesinden alıntı yapıldı altta referans var.
+Subscription Types in Apache Pulsar
+Updated July 2022
+
+Apache Pulsar is a publish-subscribe distributed messaging system.  When consumers subscribe to topics in Pulsar, there are four different types to choose from:
+Exclusive, Failover, Shared, and Key_Shared.  
+In this article we will review the different subscription types and what factors to consider when choosing between them.
+
+If you are interested in learning more about the basics of Pulsar structure, check out our article on What is Pulsar?.
+
+Message Ordering and Scaling
+For most use cases, message ordering and scaling are crucial to the success of the messaging system.  
+Message ordering preserves the order in which messages are received by a partition topic from producers.  
+Just think of the mess caused by a financial services provider not having assurance that message order is preserved.
+
+Scaling is another important factor.  In order for a system to scale there needs to be potential for multiple consumers to consume messages 
+from a topic partition at the same time.  If not, bottlenecks can develop, slowing down the entire system and hindering scalability.
+
+4 Subscription Types
+When consumers subscribe to topics in Pulsar, there are four different types to choose from: Exclusive, Failover, Shared, and Key_shared.
+
+Exclusive subscription
+Exclusive subscriptions allow only a single consumer to subscribe to a partition topic.  
+The benefit of the Exclusive subscription is that ordering is guaranteed.  
+However, Exclusive subscriptions do not scale well because only one consumer can consume messages at a time.
+
+Failover subscription
+With the Failover subscription, multiple consumers can attach to the subscription.  
+However, only one consumer can receive messages at a time.  The consumers have priority.  
+When the master consumer disconnects, then the next consumer in line can receive messages.  
+
+Like with Exclusive, Failover guarantees ordering.  However, it’s not scalable.
+
+Shared subscription
+The Shared subscription is also referred to as round robin mode.  
+With the Shared subscription type, multiple consumers can read messages from a partition topic at the same time.  
+Messages are delivered to consumers in a round-robin fashion.  Any given message is delivered to only one of the consumers.  
+If the consumer for a particular message disconnects before acknowledging receipt of that message, 
+then the message will be resent to one of the remaining consumers. 
+
+For Shared subscriptions message ordering is not guaranteed.  However, this type is scalable because multiple consumers can be consuming at the same time.
+
+Key_Shared Subscriptions
+Key_Shared subscriptions allow multiple consumers to attach at the same time.  
+With this kind of subscription messages need to specify the key or ordering key, and the same key or ordering key is delivered to only one consumer.
+
+Key_Shared is both scalable and preserves the message ordering.
+
+Note on message ordering across topics
+If a producer is sending the same message to multiple topics, there is no guarantee that it will be read from each topic in the same order.   
+Message ordering discussed above is limited to ordering within a topic or partition topic.
+
+Summary on Pulsar subscription types
+For most use cases it will make most sense to use Key_Shared subscriptions because it is both scalable and retains message ordering. 
+
+https://dattell.com/data-architecture-blog/subscription-types-in-apache-pulsar/
+https://pulsar.apache.org/docs/en/concepts-messaging/.
+
+
+
+
