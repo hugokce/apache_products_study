@@ -2,3 +2,843 @@ https://www.udemy.com/course/sifirdan-apache-kafka-kurulum-ve-kullanim/learn/lec
 
 4,5 saat eğitim
 
+Ubuntu Tam Ekran Kodları
+sudo apt-get install virtualbox-dkms
+
+sudo apt-get install virtualbox-guest-dkms
+
+sudo apt-get remove libcheese-gtk23
+
+sudo apt-get install xserver-xorg-core
+
+sudo apt-get install virtualbox-guest-x11
+
+
+----------------------------------------------
+dev klasöründe diskler bulunur.
+etc altında kurulum dosyaları bulunur
+lib linux kütüphaneleri bulunur.
+mnt disk mount etme.
+opt bazı uygulamalar opt altına kur denilebiliyor.
+proc çalışan aygıtları görürüz
+run çalışan dosyaların bilgisi olur
+sbin sistemle ilgili dosyalar var.
+tmp geçici dosyaları tutar.
+usr kullanıcının klasörüdür
+var klasörü kayıtları tutar. log dosyaları burada yer alır.
+
+which ile dosyanın yerini bulabiliyoruz
+which ls  /usr/bin/ls verir
+which java /usr/bin/java verir
+komut burada kurulu diyor.
+
+java kurulumu
+sudo apt install openjdk-11-jre-headless
+
+Java arrayler
+int [] sayilar = new int[5];
+sayilar[0]=112;
+sayilar[1]=20;
+sout()sayilar[1];   20 verir
+
+Java Map
+Map<String,String> p = new HashMap<String,String>();
+p.put("aaa","www");
+p.put("eee","www");
+sout(p.get("aaa"));   www verir
+key olarak aaa verdik www döndürdü
+
+Java Class
+public class ogrenci{
+int yas;
+String ad;
+public String getirAd()
+{
+ return ad;
+}
+}
+
+Java nesne oluşturma 
+üstte class oluşmuştu bundan nesne oluşturalım
+ogrenci og1 = new ogrenci();
+og1.ad="hamza";
+og1.yas=20;
+ogrenci og2 = new ogrenci();
+og2.ad="hamza2";
+
+--------------------
+Python
+sudo apt-get install python3.9
+
+cmdde
+python get-pip.py çalıştırılır ve pip windowsa kurulur
+öncesinde get-pip.py indirilmeli.
+pip -V ile version görülür
+
+sudo apt-get install python-pip 
+pip3 -V ile version görüntülenir
+
+python class
+class ogrenci:
+    adi=""
+    yas=0
+    def don(self):
+        return self.adi
+
+python nesne olusturma
+og1=ogrenci()
+og1.adi="wwwaa"
+og1.yas=22
+print(og1.adi)
+print(og1.yas)
+print(og1.don())
+
+try:
+    print("www")
+except Exception as e:
+    print(e)
+finally:
+    print("kapan")
+
+hata aldıralım
+
+try:
+    print("www")
+    a=23/0
+except Exception as e:
+    print("hata aldı")
+    print(e)
+finally:
+    print("kapan")
+
+division by zero uyarısı verir
+
+try:
+    print("www")
+except Exception as e:
+    print("hata aldı")
+    print(e)
+finally:
+    print("kapan")
+
+
+Kafka nasıl çalışır
+veriyi tutar gerekli kişiye verir kaybetmeyeye çalışır
+
+Veri girişi nasıl olur
+3 veri girişi var
+Client Server
+Client Laptop
+Client Mobile
+sonra load balancer var. bunlardan sonra.
+Sonrasında web servisimiz var applicationımız.
+Bundan sonra da kafka clusterımız var. Buna veriyi basıyor
+Sonra da kafka clusterdan veri çeken web serverımız olabilir.
+Client da veriyi kafkadan çekiyor olabilir.
+Client direk kafkaya veri basıyor olabilir.
+
+Kafka Broker nedir?
+Kafkaya veri geliyor. Kafka veriyi alıyor Kafka broker o veriyi 
+alıyor tutuyor. kaybetmemek için diske yazıyor. sonra isteyen 
+arkadaşa consumera gönderiyor. veriyi ramde ve diskte tutuyor.
+veriyi aynı miktarda ramde ve diskte tutuyor.
+ramde tutuyor diskte yazmadan da veriyi göndermiyor
+ramde hata olursa disktten okuyup gönderiyor.
+birden fazla kafka broker olabiliyor.
+kafka brokerlar datayı tutuyor.
+verinin kopyalarını da kendi içlerinde tutuyor
+broker1 2nin kopyasını 3 1in kopyasını tutuyor gibi.
+sunucular ölse diğer brokerdan okuyup datayı gönderiyor
+kafka brokerda data tutulur data ram tutulup 
+diske yazmadan da datayı göndermez kısacası
+
+Zookeeper nedir ne iş yapar?
+Zookeeper statusleri tutuyor.
+kafka broker 1 broker2 ayakta mı şeklinde.
+sonra veriyi nereye göndereceğini tutuyor.
+kafka 1deki 3 verisinin replicası nerede duruyor.
+kafka 1 öldüyse replicası nerede duruyor
+trafik polisi gibi, ayakta mısın yaşıyor musun vs yapar.
+kafka zookeeper olmadan broker1 2 den haberi olmuyor
+Kafka içine gömülecek zookeeper
+
+Kafka Kurulum
+win için kafka_2.13-2.8.0 
+ubuntu için kafka_2.13-2.8.0.tgz
+açtıktan sonra mv ile /opt altına attık
+bin altındaki sh ile ayağa kaldırırız.
+maven kurduk
+apache-maven-3.8.1-bin.zip indirdik win için
+mvn -version ile versiyona bakabiliriz
+sudo apt install maven ile ubuntuya kurarız
+
+Kafdrop ile kafka cluster yönetimini sağlıyor bir arayüz sağlıyor
+https://github.com/obsidiandynamics/kafdrop
+
+ubuntuya da githubtan indirdikten sonra
+mv kafdrop-master /opt altına atarız
+
+Kafka ÇAlıştırma
+1 ZK 1 broker gerekiyor kafka çalıştırmak için
+
+Şimdi zookeeper.properties içinde ayarları yapalım
+dataDir = /tmp/zookeeper  zk dosyalarını nereye çıkaracağım diyor
+clientPort=2181 ile portunu istiyor
+maxClientCnxns=0  ile maxclient sayısını istiyor
+admin.enableServer=false ayarları var. 
+
+kafka altında bine geliyoruz
+zookeeper-server-start.bat deyip yanına config dosyası veririz o da 
+c:\kafka_2.13-2.8.0\config\zookeeper.properties deriz
+Şimdi broker kuralım bir de
+bunun için de server.properties dosyasını kullanacağız
+broker.id var birden fazla broker varsa bunu değiştiririz
+num.io.thread sayısı var
+socker send receive limitleri var
+partition size var num.partition
+zookeeper.connect=localhost:2181 ayarı var.
+zk portunu değiştirirsek bu portu da değiştiririz
+bin altına geliriz kafka-server-start.bat buna da config dosyası veririz
+C:\kafka_2.13-2.8.0\config\server.properties  deriz
+ şimdi kafka çalışmaya başlar
+şimdi de kafdrop çalıştıralım
+kafdrop-master içine geliriz ve burada cmd açarız
+burada mvn install deriz
+kafdropun jarlarını indirip kütüphanleri birleştirir
+success olunca target içine jar ekledim der
+şimdi target içinde iken cmd yaptık
+java -jar kafdrop-3.28.0-SNAPSHOT.jar --kafka.brokerConnect=localhost:9092 deriz
+localhost hata alırsa lokaldeysek 127.0.0.1 deriz
+artık çalıştıktan sonra 127.0.0.1:9000 deriz ve kafdrop arayüzü görürüz
+
+Ubuntu üzerinde ZK çalıştırma
+/opt/kafka_2.13-2.8.0/bin altına geliriz terminal açarız
+./zookeeper-server-start.sh /opt/kafka_2.13-2.8.0/config/zookeeper.properties deriz
+
+Ubuntu üzerinde broker çalıştırma
+/opt/kafka_2.13-2.8.0/bin altına geliriz terminal açarız
+./kafka-server-start.sh /opt/kafka_2.13-2.8.0/config/server.properties deriz
+
+Ubuntu üzerinde kafdrop çalıştırma
+/opt/kafdrop-master klasörüne geldik terminal açtık
+mvn install diyoruz jarlarını indiriyor
+cd target diyelim ls atalım ve jarı çalıştıralım
+sudo java -jar kafdrop-3.28.0-SNAPSHOT.jar yanına kafkanın yolunu söylememiz lazım
+--kafka.brokerConnect=localhost:9092 deriz
+localhost:9000 yazalım ui gelir karşımıza
+
+------------------------------------------------------
+Docker ile Apache Kafka Kurulum bilgileri
+
+docker network create kafka-network --driver bridge
+
+docker run -d --name zookeeper-server  --network kafka-network  -e ALLOW_ANONYMOUS_LOGIN=yes   bitnami/zookeeper:latest
+
+docker run -d --name kafka-server   --network kafka-network   -e ALLOW_PLAINTEXT_LISTENER=yes  -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181   bitnami/kafka:latest
+
+docker run -d --rm -p 9000:9000   --network kafka-network   -e KAFKA_BROKERCONNECT=kafka-server:9092  -e SERVER_SERVLET_CONTEXTPATH="/"  obsidiandynamics/kafdrop:latest
+
+--------------------------------------------------------
+Apache Kafka Topic Oluşturma
+Topici bir kanal olarak düşünebiliriz haberleşme kanalı
+veriyi basan da veriyi çeken de bunu kullanıyor 10 kişi de aynı kanaldan
+görüşüp haberleşebilir
+
+kafdroptan topic oluşturma
+new dedik isim verdik hamza dedik
+number of partition istedi aynı veriyi kaç parça olarak tutayım diyor
+3 kafka brokerımız olursa 3 partition dersek aynı anda 3 consumer
+bağlanıp okuyabilir paralel bir şekilde okuyup yazmayı sağlar
+bunu 1 dersek 1 consumer bağlanabilir
+partition sayısı paralel okurken işimize yarıyor
+replication factor istedi  bir verinin kaç kopyasını tutayım diyor
+broker sayısı kadar yapabiliriz biri göçtüğünde diğerinden devam edebilir
+3 tane de topic oluşturabiliriz istersek
+
+partition 0'a basarsak buraya gelen mesajları görebiliriz
+
+Offsetler ile kuyruğu okur.
+leader node var replica node var.
+
+Windows bat dosyası ile topic oluşturma
+önce c:\kafka_2.13-2.8.0\bin\windows geliriz cmd açarız
+kafka-topics.bat --topic hamza1 --zookeeper 127.0.0.1:2181 --create --replication-factor 1 --partitions 1 deriz
+
+ubuntudan topic oluşturma
+/opt/kafka_2.13-2.8.0/bin gideriz terminal açarız
+./kafka-topics.sh --help dersek parametreleri görebiliriz
+./kafka-topics.sh --zookeeper 127.0.0.1 2181 --topic hamza1 --create --replication-factor 1 --partitions 1  deriz
+
+-------------------------------------------
+Apache Kafka Consumer ve Producer Oluşturma
+Producerdan veri geliyor kafkaclustera(broker ve zookeeper var içinde)
+Producer Java ve Python olabilir.
+keyvalue geliyor
+key kullanıcı : hamza 1993 doğumlu da value olsun
+veri producera geldi kafka bunu almak için serialize ediyor brokera yazıyor
+topic usera yaz diyor topic hamza altında kullanıcı hamza 1993 doğumlu duruyor
+zookeeper maplemesini yapıyor. hamzanın verisinin yedeği orada, kendisi burada
+şu kadar broker var tüm bilgileri zookeeper tutuyor
+kafka broker diske yazıyor. 
+
+Consumer da ayrı bir uygulama sürekli dinliyor
+bunu da java ve python ile oluşturuyoruz
+Bu ilk ayağa kalkarken Topic:usera bağlanıyor hazırım bilgi gelirse
+bana ver diyor
+producer diske , memoryye yazdıktan sonra consumerın alabileceği konuma geliyor
+alabilirsin diyor bu da topici dinlediği için consumera geliyor veri
+bu datayı ayırıp dbye yazabiliriz.
+kafka broker da bir sonrakine geçeyim diyor
+
+Birden fazla producer olabilir aynı topici dinleyebilir
+Birden fazla consumer olabilir dinleyebilir.
+
+Şimdi Javada bir producer yazalım
+VSCode açtık
+javapro adında klasör ve proje açtık
+Hello Worlds yazdık App.java altına.
+
+3 tane jar indirdik
+Producer Oluşturma
+Önce properties dosyası olması lazım
+
+serialize etmemiz gerekiyor diske yazarken serialize deserialize
+edilmesi lazım bytelara çevirmesi lazım diske direk json olarak yazmıyoruz
+o yüzden nasıl serialize edeceğim diyor biz de söylüyoruz
+şu java classını kullanacaksın diyoruz
+serialize yöntemlerini değiştirebiliriz
+Producer için key value StringString veriyoruz
+key string verince valueyu da string dönecek
+bunu da kafkaproducer classından vereceksin diyoruz
+producer.send ile veriyi göndereceksin diyoruz
+sende record objesi oluştururuz
+buradan da ne göndereceğimizi söylüyoruz
+hamza key 1 value 2 olarak gönderelim
+producerı kapatmayı unutmayalım şişebilir
+Bu classların jarları bizim indirdiklerimiz
+Şimdi bunları ekleyelim
+Sol altta Java Projects Referenced Libraries var
++ ya basıp clients.jarını ekleriz
+Şimdi Producera gelip ALT+ENTER diyoruz import gerçekleşiyor
+Tüm uyarılar için import ederiz
+slf4jdkyı da ekleriz aynı yöntemle.
+slf4api ekleriz yine.
+
+import java.util.Properties;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+
+public class App {
+Run | Debug
+public static void main (String[] args) throws Exception {
+Properties props = new Properties();
+props.put("bootstrap.servers","localhost:9092");
+props.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
+props.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
+
+Producer<String,String> producer=new KafkaProducer<>(props);
+producer.send(new ProducerRecord<String,String>("hamza","1","2"));
+producer.close();
+}
+}
+
+
+şimdi bu kodu çalıştırırız
+kafka uzakta ise bootstrap localhost yerine onun ipsi yazılır
+
+Şimdi Consumer yazalım
+Şimdi gelen istekleri dinleyen biri de olmalı.
+Şimdi first offset 0 , last offset 4 gördüğümüze göre 
+kuyrukta 4 tane var. Hepsini okusaydık 4 4 olurdu
+aradaki farkı alınca kuyrukta bekleyen sayısına ulaşıyoruz
+Şimdi önemli olan bu 4 taneyi nasıl okuyacağız
+Eski api.javaya gönderen dedik
+buna da dinleyen diyoruz dinleyen.java
+public class App {   public class Gönderen oldu
+yine properties dosyamız olacak.
+key valueya serialize vermemiz gerekli yine
+props.put ile ConsumerConfig group id config ekleriz
+adı ilk grup olsun
+dinleyenler arası grup. bu grupta olanlar bu grubu dinliyor
+gönderende grup yoktur. gonderen topice gönderir
+dinleyen de topic içindeki grubu dinler.
+KafkaConsumer ekleriz props altına
+consumerı topice bağladık subscribe ile. bu array list alır
+topicin adını veririz buraya hamza diye. consumer artık hamzayı dinliyor
+sout ile Hazır yazdık
+consumer sürekli dinleyeceği için while True verdik
+uygulamayı kapatana kadar consumer sürekli dinleyecek
+göndereceğimiz veriler string olduğu için String String diyoruz
+100 milisaniye beklesin diyoruz 100
+en sonda consumera 100ms bekleyip veriyi çek dedik
+veriyi çekip recordsa atacak
+verileri recordsta ise gelen veriyi for ile döndürürüz
+çünkü gelecek veri string string
+ConsumerRecords  s olduğu için çoğul
+ConsumerRecord bu da tekil
+ConsumerRecords  ConsumerRecord'lardan oluşuyor
+o yüzden for ile record:records şeklinde dönebildik
+veri varsa recordtadır
+Şimdi veriyi ekrana yazdıralım
+offseti yazdıralım sonra keyi sonra da valueyu yazdıralım 
+burada deserialize ediyoruz çünkü producerda serialize edip bytelara çeviriyoruz
+sonra burada da deserilize edip objeye stringe çevirmemiz lazım
+
+
+
+
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Properties;
+
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.producer.KafkaConsumer;
+
+
+public class Dinleyen {
+Run | Debug
+public static void main (String[] args) throws Exception {
+Properties props = new Properties();
+props.put("bootstrap.servers","localhost:9092");
+props.put(ConsumerConfig.GROUP_ID_CONFIG,"ilkgrup");
+props.put("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
+props.put("value.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
+
+KafkaConsumer<String,String> consumer=new KafkaConsumer<String,String>(props);
+
+consumer.subscribe(Arrays.asList("hamza"));
+
+System.out.println("HAZIR");
+
+while(True){
+ConsumerRecords<String,String> records = consumer.poll(Duration.ofMillis(100));
+for(ConsumerRecord<String,String> record:records){
+    System.out.printf("offset= %d, key =%s, value= %s\n ",record.offset(),record.key(),record.value());
+}
+}
+}
+}
+
+Çalıştırmada sorun olursa vs code yeni pencere açıp çalıştırabiliriz
+Artık çalıştırdık producerdan gönderdiklerimizi yakaladık
+
+-----------------------------------------
+Şimdi de Python ile Producer yapalım
+VSCode açtık prod.py adlı dosya oluşturalım
+conf ile bir dictionary oluşturalım
+bootstrap server vermemiz gerekiyor bu arkadaş nereye bağlanacak çünkü.
+localdeki kafkayı gösteriyoruz
+clientid socket.gethostname() veriyoruz
+clientid kendi hostnameini alsın diyoruz
+producer oluşturduk
+sonucu yazan bir method yazalım
+def sonuc(err,msg)
+ err is not none hatalı gönderme oldu diyelim
+mesajı alalım üstüne de gelen erroru basalım
+else başarılı gönderme dedik format deyip mesajı basalım
+
+producer.produce ile topic ismi yazılır hamza
+sonrasında key ve value yazılır
+callback de yapalım. bu işlemi tamamladıktan sonra geri dönüş yapması için kullanırız
+producer.poll ile 1 veririz 1 sn beklesin diye.
+cmd  açarız ve python prod.py deriz
+soketi bulamadım dedi import socket dedik
+sonra producer yok diyor from confluent_kafka import Producer dedik
+pip install confluent_kafka diyoruz
+tekrar çalıştırdık başarılı gönderme dedi
+
+import socket
+from confluent_kafka import Producer
+
+conf ={'bootstrap.servers':"localhost:9092",'client.id':socket.gethostname()}
+
+producer=Producer(conf)
+
+def sonuc(err,msg):
+    if err is not None:
+        print("Hatalı gönderme oldu {} {}".format(str(msg),str(err)))
+    else:
+        print("Başarılı Gönderme: {}".format(str(msg)))
+
+producer.produce("hamza",key="1111",value="2222",callback=sonuc)
+
+producer.poll(1)
+
+
+Şimdi python ile consumer yazalım
+cons.py dosya açalım
+import Consumer açalım
+group id ekleyelim  ilkgrup dedik
+
+consumer ekledik.
+basit bir döngü yapalım
+while True ekledik
+consumer ve topics leri verdik
+şu topiclere subscribe ol diyoruz
+running = True deyip
+while running diyelim
+msg=consumer.poll(timeout) verelim
+if mesaj err ise hata var diyelim
+else gelen mesajı ekrana yazdırırız
+mesajı formatlayıp decode utf-8 verelim
+finally consumer.close diyelim
+
+sonra basit döngüyü çağıralım
+consumerkısmına consumer1i veriyoruz
+topic kısmına hamza diyoruz
+şimdi yeni bir cmd açalım
+python cons.py dedik
+error none type hatası verdi
+o zaman if msg is none continue ekledik
+şimdi sürekli çalıştırıp gönderdik 2222 sürekli geldi
+
+from socket import timeout
+from confluent_kafka import Consumer
+
+running = True
+conf ={'bootstrap.servers':"localhost:9092",'group.id':"ilkgrup"}
+
+consumer1 = Consumer(conf)
+
+def basit_dongu(consumer,topics):
+    try:
+        consumer.subscribe(topics)
+        
+	while running:
+	    msg=consumer.poll(timeout=1.0)
+	    if msg is None:continue
+	    if msg.error():
+		print("hata var")
+	    else:
+		print("Gelen mesaj: {}".format(msg.value().decode('utf-8')))
+    finally:
+	consumer.close()
+
+basit_dongu(consumer=consumer1,topics=["hamza"])
+
+
+python cons.py ile çalıştırırız
+
+-------------------------------------------------
+
+Apache Kafka Consumer Group Yapısı:
+Aynı gruptakiler aynı veri üzerinde çalışıyor
+farklı gruptakiler farklı veri üzerinde çalışıyor
+1 topic içinde 2 tane farklı grup varsa producer o iki gruba da
+veriyi gönderiyor. gruplu bir şekilde ayırt etmeyi sağlıyor
+topicte birden fazla consumerımız var bunları yönetmeyi kolaylaştırıyor
+a gönderdik a iki grupta da var. ikisini de dinleyen consumer 
+a yı alacaktır.
+her consumerın kendi grubu olabilir. a iki gruba da geldi diyelim
+consumerın biri birinci grubu diğeri de ikinci grubu dinliyor
+ancak ikisi de birinci grubu ya da ikisi de ikinci grubu dinliyor olabilir
+veriyi ikisini de gönderince veriyi çoklamış gibi oluyoruz
+
+Birden fazla grup ile consumer çalıştırma
+cons.py yi çoklayalım
+cons2.py diyelim
+içindeki ilkgrup yazısını ikincigrup yapalım
+şimdi bir terminalde python cons.py yaptık
+ikinci terminalde python cons2.py çalıştırdık
+şimdi üçüncü terminalde python prod.py çalıştırıp veri gönderelim
+iki terminale de gönderdiğimiz veriler geldi
+2222
+2222
+2222
+2222
+2222
+şeklinde.
+1 veri iki yere de gidiyor. 
+iki python consumer da ilkgrup olsaydı tesadüfi olarak dağıtacaktı
+ya birine ya diğerine tesadüfi olarak veriyi gönderecekti.
+1 partition olduğu için birine yüklenmeye başladı. 
+cons2 bağlantısını koparırsak consa göndermeye devam eder.
+ikinci grupta veri kaldıysa tekrar çalıştırdığımızda ikincigrup için
+verileri alırız
+kafdrop consumerstaki veriler de tüketilmiş oldu
+
+---------------------------
+Apache Kafka Çoklu Broker oluşturma
+Replika ve partition olaylarına girmemiz için çoklu broker olması gerekiyor
+tek brokerda tek replika ve tek partition olarak çalıştırabiliriz
+10 tane sunucuda 10 tane broker çalıştırabiliriz
+partition sayısı da işin ne kadar hızlı olması gerektiğini etkiliyor
+10 tane consumer bekleyebilir bir ona bir diğerine atarak hızlandırabiliriz
+bunlar için çoklu kafka broker kurmamız gerekiyor
+
+Çoklu kafka broker için properties dosyasını ayarlamak
+kafkayı kurduğumuz yere gideriz kafka_2.13-2.8.0 / config içine gideriz
+server.properties var bir de server2.properties dosyası var
+bunların arasındaki fark listener portudur
+biri 9092 diğeri 9093 
+serverın brokerid 0 server2ninki 1 dir
+log.dirs =/tmp/kafka-logs diğerinde yani server2de 
+log.dirs=/tmp/kafka-logs2 demişiz
+server3 oluşturursak broker.id=2 deriz, listener 9094 veririz porta.
+log.dirs=/tmp/kafka-logs3 deriz
+
+Şimdi kafka brokerları sırayla çalıştıralım
+önce kafka windows bin içine girip 
+zookeeper-server-start.bat c:\kafka\config\zookeeper.properties çalıştıralım
+şimdi başka  bir terminalde kafka brokerları çalıştırmaya başlayalım
+önce kafka bin windows içine girip 
+kafka-server-start.bat c:\kafka\config\server.properties diyelim
+aynı anda görmek için kafdrop da çalıştıralım
+C:\kafdrop-master\target içine girip cmd açalım
+java -jar kafdrop-3.28.0-SNAPSHOT.jar --kafka.brokerConnect=localhost:9092 diyelim
+127.0.0.1:9000e bakalım çalıştı
+1 tane brokerı gördük 9092 ile.
+şimdi yine 
+önce kafka bin windows içine girip 
+kafka-server-start.bat c:\kafka\config\server2.properties diyelim
+
+ikinci brokerı çalıştırdık
+
+şimdi yine 
+önce kafka bin windows içine girip 
+kafka-server-start.bat c:\kafka\config\server3.properties diyelim
+kafdropa baktığımızda 3 brokerımız da geldi
+
+şimdi 1 zookeeper 3 brokerımız var
+
+Apache Kafka Topic Çoklu PArtition (parçalara ayırmak)
+tek broker olunca tek partition olma zorunluluğu var ama broker 
+sayısını arttırdık
+tek brokerda çok partition yapılabilir ama önerilmiyor
+artık 3 partition yapalım da performansı elde edelim diyebiliriz
+Çoklu partitionda birden fazla consumer bağlanabiliyor 1 topice.
+normalde gruplu olarak bağlanabiliyor ama hepsi aynı anda
+dinleyemiyor, hepsi aynı anda gitmiyor
+Çok verimiz varsa(milyonlarca) partition sayısını ne kadar 
+arttırırsak o kadar iyi. çünkü sonrasında o kadar consumer bağlayıp
+veriyi hızlı bir şekilde çekebiliriz
+
+Çoklu Partition Topic oluşturma:
+kafdrop üzerinden çoklu partition içeren topic oluşturacağız
+Şimdi topic kısmına gelip New diyelim
+topic name hamzacoklu diyelim
+number of partitionsa 3 diyoruz
+replication factor 1 dedik
+oluşturalım
+artık 3 partitionlı bir topicimiz mevcut.
+partition 0 , 1 ve 2 olarak karşımıza geldi
+
+Çoklu Partition ile Çoklu Consumer Çalıştırma:
+3 partitionlı bir topicimiz var. Consumer bunu nasıl çalışıyor
+şimdi çoklu partitionlı yapıyı konuşalım
+prod.pyde hamzacoklu yapalım producer.produce("hamzacoklu")
+cons.pyde de basit_dongu() içinde topics=["hamzacoklu"] 
+dedik
+
+import socket
+from confluent_kafka import Producer
+conf ={'bootstrap.servers':"localhost:9092",'client.id':socket.gethostname()}
+producer=Producer(conf)
+def sonuc(err,msg):
+    if err is not None:
+        print("Hatalı gönderme oldu {} {}".format(str(msg),str(err)))
+    else:
+        print("Başarılı Gönderme: {}".format(str(msg)))
+
+producer.produce("hamzacoklu",key="1111",value="2222",callback=sonuc)
+producer.poll(1)
+------------------
+cons ise
+
+from socket import timeout
+from confluent_kafka import Consumer
+
+running = True
+conf ={'bootstrap.servers':"localhost:9092",'group.id':"ilkgrup"}
+
+consumer1 = Consumer(conf)
+
+def basit_dongu(consumer,topics):
+    try:
+        consumer.subscribe(topics)        
+	while running:
+	    msg=consumer.poll(timeout=1.0)
+	    if msg is None:continue
+	    if msg.error():
+		print("hata var")
+	    else:
+		print("Gelen mesaj: {}".format(msg.value().decode('utf-8')))
+    finally:
+	consumer.close()
+
+basit_dongu(consumer=consumer1,topics=["hamzacoklu"])
+haline geldi
+
+
+cons2de de hamzacoklu dedik
+cons3 oluşturup ona da hamzacoklu diyelim
+
+hepsi tek grubu dinlesin diye ilkgrup olarak grup.id bırakalım
+
+şimdi çalıştıralım
+python cons.py
+python cons2.py
+python cons3.py
+
+şimdi python prod.py çalıştıralım 1 tane veri gönderelim
+şimdi defalarca gönderdik sadece 1 partitionla çalıştığı için cons.py
+adlı cmd ekranında gördük
+şimdi prod dosyasını kopyalayıp prodcoklu.py olarak saklayalım
+içine de 0-10 arası veri dönen for yazalım sürekli veri bassın
+istediğimiz için for ekledik str(i) dedik
+partition = 0 dersek parttion 0a gitsin veriler demiş oluyoruz
+
+
+import socket
+from confluent_kafka import Producer
+
+conf ={'bootstrap.servers':"localhost:9092",'client.id':socket.gethostname()}
+
+producer=Producer(conf)
+
+def sonuc(err,msg):
+    if err is not None:
+        print("Hatalı gönderme oldu {} {}".format(str(msg),str(err)))
+    else:
+        print("Başarılı Gönderme: {}".format(str(msg)))
+
+for i in range(0,10):
+    producer.produce("hamzacoklu",key="1111",value=str(i),callback=sonuc,partition=0)
+
+producer.poll(1)
+
+--------------------------
+şimdi python prodcoklu.py çalıştıralım
+partition=random.randint(0,2) dersek üçünden birine gidecek veriler 
+range 0,100 yaptık
+
+import socket
+from confluent_kafka import Producer
+import random
+
+conf ={'bootstrap.servers':"localhost:9092",'client.id':socket.gethostname()}
+
+producer=Producer(conf)
+
+def sonuc(err,msg):
+    if err is not None:
+        print("Hatalı gönderme oldu {} {}".format(str(msg),str(err)))
+    else:
+        print("Başarılı Gönderme: {}".format(str(msg)))
+
+for i in range(0,100):
+    producer.produce("hamzacoklu",key="1111",value=str(i),callback=sonuc,partition=random.randint(0,2))
+
+producer.poll(1)
+
+yani 100 tane veri gelince yarısı birine yarısı diğerine gidiyor
+mantığını görmüş oluyoruz
+partitionlardan hangisi önce bağlanırsa o yapışabiliyor 
+verinin hep aynı partitiona gittiği görünürse bu sebeple olabilir
+
+--------------------------------------------
+Çoklu Kafka Broker ile Topic Replication (Çoklama) High Availability
+Çoklu replication konusunda bahsedelim
+1 veriyi kafka kaç yerde tutacak
+3 broker yaptık 3 replika diyebiliriz mesela
+3 brokerda da 1 veriyi aynı anda tutacaktır
+partition mantığı 1 veriyi 1 yerde tutup 1 topici birçok consumera 
+bölmekti. 100 veri gelse 30unu işleyen, 30unu işleyen 30unu işleyen
+şeklindeydi.
+
+Replika da şu şekilde 1 veri geldi. 3 replika dedik 3 brokera yazıyor
+ve raminde tutuyor. 1 broker öldüğünde kalan 2 brokerdan devam ediyor
+veri kaybını önlüyor. HA için çok önemli
+broker sayısına göre replicayı belirleriz
+5 broker varsa 5 replika diyebiliriz
+partition sayısı bizim işleme miktarımıza göre değişir
+100 consumer ile işleyeceksek 100 partition dememiz mantıklıdır
+broker sayısı kadar replika veririz
+-----------------------------------------
+Şimdi replikayı nasıl veriyoruz topice
+new topic diyelim
+hamzarep dedik, 3 partition ve 3 replika olsun diyelim
+bunun amacı 3 tane yedeğinin tutulmasıdır
+
+şimdi hamzacokluda 72 tane kuyrukta bekliyor. 
+partition0'daki broker giderse bu veriler gider çünkü 
+replikası 1 idi. ama hamzarep te veri kaybı yaşamamak için 
+
+prodcokluyu hamzarepe gönderelim
+
+import socket
+from confluent_kafka import Producer
+import random
+
+conf ={'bootstrap.servers':"localhost:9092",'client.id':socket.gethostname()}
+
+producer=Producer(conf)
+
+def sonuc(err,msg):
+    if err is not None:
+        print("Hatalı gönderme oldu {} {}".format(str(msg),str(err)))
+    else:
+        print("Başarılı Gönderme: {}".format(str(msg)))
+
+for i in range(0,100):
+    producer.produce("hamzarep",key="1111",value=str(i),callback=sonuc,partition=random.randint(0,2))
+
+producer.poll(1)
+
+çalıştırdık veri eşit bir şekilde geldi.
+bu halde çalışırken kafkalardan birini kill etsek 
+server.properties olarak çalışanı kapattık.
+şimdi bir tane broker gittiği için broker içindeki veriler
+ölmüş olacak. broker içindeki verilerin tamamına ulaşamayacağız
+
+çokluya artık ulaşamaz çünkü çoklu olan topic 1 replika idi.
+1 sorun olunca 1 tanesine ulaşabilecek
+100 tane veriyi 30 30 yazmıştı biri gitmiş olacak 1 broker giderse.
+kalan 70e ulaşabilecek
+ama hamzarepte 3 replika verdiğimiz için 1 broker gitse de 
+kalan 100 veriye de ulaşabilecek.
+replikanın dezavantajı 1 veriyi 3 yere yazdığı için veri israfı oluyor
+veri kaybı önemli değilse bunu kullanmıyoruz
+ama veri kaybı önemli ise replika kullanırız.
+veri kayıp etmek istemiyorsak replika yaparız
+3 katı diskte ve ramde yer kaplar replika yapınca.
+-------------------------------
+
+Apache Kafka Producer Performans Testi
+kafka bin windows altında scriptler var.
+kafka-producer-perf-test.bat --help dersek nasıl kullanacağımız görürüz
+record-size, throughput , num-records kaç mesaj atacak, hangi topice
+basacak, 
+kafka-producer-perf-test.bat --topic hamzacoklu --num-records 10 --throughput 10 
+--record-size 100 --producer-props bootstrap.servers=localhost:9092 
+dedik
+kaç kayıt 10 tane
+saniyede 10 tane gönder throughput ile.
+record size 100 byte olsun
+
+burada çalıştırınca çıktıda birçok değer sunuyor.
+ortalama kaç milisaniyede değer bastı 
+
+şimdi arttıralım
+kafka-producer-perf-test.bat --topic hamzacoklu --num-records 10000000 --throughput 100000 
+--record-size 1000000 --producer-props bootstrap.servers=localhost:9092 
+dedik
+
+----------------------------------------
+Apache Kafka Consumer Performans Testi
+Az önceki test ile bayağı veri oluştu
+kafka bin windows altında scriptler var.
+kafka-consumer-perf-test.bat --topic hamzacoklu --bootstrap-server localhost:9092 --messages 1000000
+--threads 1
+
+kaç mesaj okuyacak 1000000
+kaç thread 1 dedik
+
+
+
+
