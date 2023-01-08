@@ -66,19 +66,118 @@ ASıl soru Flink mi Spark mı hızlı olmalıdır.
 
 Apache Beam Flow:
 
+ReadInput  Apply operation   WriteOutput
+Input -->  Transform  -->    Output 
+İlk olarak Input. Datayı okumak lazım.
+Textfile,Twitter, KafkaStream, Database vs olabilir.
+
+İkinci olarak transformation var.
+mesela data 1,2,3,4,5 olsun bunları 2 ile çarpmak
+2,4,6,8,10 olacak sonuç gibi.
+
+Output kısmında da bu çıktıyı herhangi bir yere yazabiliriz
+hdfs, gfs,kafka, database , cassandradb, mongodb vs.
+
+sample code:
+import apache_beam as beam
+p1=beam.Pipeline()
+A_grade_Count=(
+p1
+| beam.io.ReadFromText('result.txt')
+| beam.Map(lambda record:record.split(','))
+| beam.Filter(lambda record[2]=='A')
+| beam.Map(lambda record:(record[1],1))
+| beam.CombinePerKey(Sum)
+| beam.io.WriteToText('A_count.txt')
+)
+p1.run  
+
+A gradeli öğrencilerin sayısını öğrenmeye çalıştık
+
+Tüm sürece Pipeline diyoruz
+Burada readfromtext input kısmı Pcollections diye geçiyor
+writetotext kısmı output kısmı
+ara kısımlar ptransform olarak görünüyor 
+
+Sparkta pcollections RDD olarak görünüyor
+Ptransform da transformation olarak bilinir sparkta.
+
+PCollections:
+Pcollection represent data.
+burada datadan bahsederken TB, PB boyutlardan bahsediyoruz
+Bu boyutta data bir yerde saklanamaz.
+birçok data birçok makinede dağıtılır ya da barındırılır.
+
+üstte yazdığımız koda baktığımızda buraya 1 file değil de
+directory verebiliriz böylece yüzbinlerce dosyayı alabiliriz
+| beam.io.ReadFromText('result.txt')
+
+Burada birden fazla makinedeki datalar çekiliyor olabilir
+ama Pcollection abstract ettiği için 1 tane gibi görülür
+ama arkasında makinelerdeki bilgiler çeker.
+Tek makinede çalışılıyor gibi görünse de gerçekte
+clusterımızıda birçok makineye dağılmış olabilir.
+
+Map ya da filter operation gönderdiğimizde bu makinelerde
+çalıştırılır böylece.
+
+Özelliklerine bakalım
+-Pcollection immutabledır. Yani bir kere oluşturulunca
+değiştirilemez.
+
+txt geldi read ettik Pcollection 1 P1 oluşur
+sonra map ettik diyelim o zaman yeni bir pcollection P2 
+oluşur.
+sonra filter yaptık yeni bir pcollection oluşur P3.
+
+-Pcollection grained operationsı desteklemez.
+mesela P1 read data olduğu zaman bu single entity gibi
+davranır.
+yani 1,2,3,4 datamız olsun bunlara 2 eklemek istesek
+her birine 2 ekler demektir. 3,4,5,6 olur
+ilk elemente 2 ekle ikinciye 3 ekle vs yapamayız yani.
+
+-Diğer özellik timestamptir.
+Her element timestamp ile ilişkilidir.
+realtime data aldık okuma anı ile ilişkilidir bu datalar.
+Batch data da alsak timestamp ile ilişkilidir.
+
+-Diğer özellik same element type ve no random accesstir
+Pcollection tüm data tiplerini alabilir. Sadece
+tüm elementler aynı tipte olmalıdır.
+
+Norandom accesste ise index kullanarak erişemeyiz.
+[3] dediğimiz zaman 3. elemente erişebiliriz.
+
+-Diğer özellik no sizedır.
+Pcollectionda her sizeda data barındırabiliriz.
+stream data geliyor sürekli gelebilir üst limiti yok.
 
 
+PTransform ise
+Business logic oluşturmak için bazı transformasyonları
+yapmak adına kullanırız. Data operation olarak geçer.
 
+Pcollection     -->    PCollection
+		Map
+		Filter
+		FlatMap
+		GroupBy
 
+çeşitli işlemleri yapıp pcollectiondan diğeri işlem yaparız
 
+Installation:
+Google Colab kullanıyoruz makineye kurmakla uğraşmamak için.
 
+google colab deriz https://colab.research.google.com/
 
+Son açılanlara geliriz ve Yeni not defteri deriz
 
+print("Hello World") yazalım
 
+! pip3 install apache_beam ile import ederiz
 
-
-
-
+Driveda bir kopya oluştur diyoruz
 
 
 
