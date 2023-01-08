@@ -1,9 +1,14 @@
 https://www.udemy.com/course/apache-beam/learn/lecture/18585680?start=15#overview
+
 3 saat
+
 Technoavengers.com
 
 Apache_Beam_Resources.zip
 Apache_Beam_New.pptx  indirildi
+
+Apache Beam is a unified programming model that
+can build a portable bigdata pipelines.
 
 Apache Beam bigdata pipeline kurmak için unified programlama modelidir
 
@@ -12,6 +17,58 @@ ikisi için de aynı programı yazarız demektir
 
 sparkta farklı apileri kullandığımız mantık yerine
 burada tek programla hepsini hallediyoruz
+
+unifiedtan sonra portable da any execution engine
+da çalışabilir demektir.
+
+beam kodunu yazınca her executionenginede çalıştırabiliriz
+spark, flink samza vs hepsinde çalıştırabiliriz
+
+Spark ile başladıktan sonra Flinke ya da GoogleDataflowa
+ihtiyaç duyuldu diyelim. böylece kodları sıfırdan yazmamız
+gerekiyor. o yüzden beam api ile yazıyorsak kodları
+kolayca platformalarda çalışıyor.
+processing logic değişmeyecek apache beam sayesinde.
+java
+python 
+go ile yazabiliriz kodları
+çalıştıkları platformlar da spark,flink, apex,google
+dataflow, samza, gearbump frameworkları ile çalışır
+
+Beam Architecture:
+Beam | Runner API --> apache beam in coreudur.
+bu api kodları sparkta çalışacak hale çevirir.
+eğer bu kodu flinkte çalıştırmak istersek 
+bu engine bu kodu flink spesifik koduna çevirir
+java sdk, python sdk, go sdkları kullanırız.
+
+bu diller için çalışan workerlar var bu workerlar
+yazılan kodun diğer dillere çevrilmesindan sorumludur
+
+bir de Fn API var. Bu da worker ile beamrunner ile çalışır
+Bu yüzden processing logic kurmak için bu ikisi ile
+birlikte çalışır. Bu 2 component arasında iletişim kurmak
+için vardır Fn API.
+
+Yani kısacası Flink için yazılan kodu daha sonra samza 
+ile spark ile kullanabilir hale getirirler.
+
+Beam spark ya da flinkin yerini almıyor
+Programlama modelidir. 
+Çalışması için Spark ve Flinke yine ihtiyaç duyar.
+Execution engine değildir.
+
+Beam mi Spark mı daha hızlıdır dersek
+bu karşılaştırma geçersizdir. Apache Beam performansı
+execution engine'in performansına bağlıdır.
+Sparkta çalışıyorsa sparkın performansına bağlıdır.
+ASıl soru Flink mi Spark mı hızlı olmalıdır.
+
+Apache Beam Flow:
+
+
+
+
 
 
 
